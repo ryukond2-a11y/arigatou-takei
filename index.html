@@ -7,37 +7,56 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* クイズ用の追加スタイル */
-        .quiz-area {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-        }
-        .quiz-area input {
-            padding: 10px;
-            border-radius: 6px;
-            border: none;
-            margin-right: 10px;
-            width: 200px;
-        }
-        .forgot-link {
-            display: block;
-            margin-top: 15px;
-            color: #fff;
-            text-decoration: underline;
-            font-size: 0.9em;
-            cursor: pointer;
-            opacity: 0.8;
-        }
-        #access-code-display {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #00ffcc; /* 目立つ色 */
-        }
-    </style>
+    /* クイズ用のデザイン調整（薄水色ベース） */
+    .quiz-area {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background: rgba(224, 247, 250, 0.1); /* ほんのり水色の背景 */
+        border: 2px solid #b2ebf2; /* 薄水色の枠線 */
+        border-radius: 12px;
+        backdrop-filter: blur(5px);
+    }
+    .quiz-area p {
+        color: #b2ebf2; /* テキストも薄水色に */
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .quiz-area input {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #b2ebf2;
+        background: #fff;
+        color: #000;
+        width: 100%;
+        max-width: 250px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+    /* 「忘れた方はこちら」のリンクを目立たせる */
+    .forgot-link {
+        display: inline-block;
+        margin-top: 15px;
+        color: #b2ebf2; /* 薄水色 */
+        text-decoration: none;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-bottom: 1px dashed #b2ebf2; /* 点線の下線 */
+        transition: 0.3s;
+    }
+    .forgot-link:hover {
+        color: #e0f7fa;
+        border-bottom-style: solid;
+    }
+    #access-code-display {
+        margin-top: 15px;
+        font-size: 1.1em;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 8px;
+    }
+</style>
 </head>
 <body>
 
