@@ -7,25 +7,25 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
     <style>
-    /* クイズと速報エリアのデザイン（薄水色ベース） */
+    /* クイズと速報エリア（共通デザイン） */
     .quiz-area, .version-area {
         display: none;
         margin-top: 20px;
         padding: 20px;
-        background: rgba(224, 247, 250, 0.1); 
-        border: 2px solid #b2ebf2; 
+        background: rgba(0, 188, 212, 0.1); /* 濃いめの水色を背景に */
+        border: 2px solid #00bcd4; /* 枠線を濃い水色に */
         border-radius: 12px;
         backdrop-filter: blur(5px);
     }
     .quiz-area p, .version-area p {
-        color: #b2ebf2; 
+        color: #00bcd4; 
         font-weight: bold;
         margin-bottom: 10px;
     }
     .quiz-area input {
         padding: 12px;
         border-radius: 8px;
-        border: 1px solid #b2ebf2;
+        border: 1px solid #00bcd4;
         background: #fff;
         color: #000;
         width: 100%;
@@ -33,20 +33,21 @@
         box-sizing: border-box;
         margin-bottom: 10px;
     }
+    /* 濃いめの水色ボタン（リンク形式） */
     .forgot-link {
         display: inline-block;
         margin-top: 15px;
-        color: #b2ebf2; 
+        color: #00bcd4; /* 濃いめの水色 */
         text-decoration: none;
         font-size: 0.95em;
         font-weight: bold;
         cursor: pointer;
-        border-bottom: 1px dashed #b2ebf2; 
+        border-bottom: 2px solid #00bcd4; /* 下線も太く */
         transition: 0.3s;
     }
     .forgot-link:hover {
-        color: #e0f7fa;
-        border-bottom-style: solid;
+        color: #80deea;
+        border-color: #80deea;
     }
     #access-code-display {
         margin-top: 15px;
@@ -61,12 +62,12 @@
         padding: 12px;
         color: #fff;
         text-decoration: none;
-        border-bottom: 1px solid rgba(178, 235, 242, 0.2);
+        border-bottom: 1px solid rgba(0, 188, 212, 0.3);
         font-size: 0.95em;
         text-align: left;
     }
     .version-link:last-child { border-bottom: none; }
-    .version-link:hover { background: rgba(178, 235, 242, 0.1); }
+    .version-link:hover { background: rgba(0, 188, 212, 0.2); }
 </style>
 </head>
 <body>
@@ -84,15 +85,17 @@
                     takei.net 公式サイト
                 </a>
 
-                <span class="forgot-link" onclick="toggleVersions()" style="margin-right: 15px;">📋 バージョン速報</span>
-                <span class="forgot-link" onclick="toggleQuiz()">アクセスコードを忘れた方はこちら</span>
+                <span class="forgot-link" onclick="toggleVersions()" style="margin-right: 20px;">📋 バージョン速報を見る</span>
+                
+                <span class="forgot-link" onclick="toggleQuiz()">🔑 アクセスコードを忘れた方</span>
 
                 <div id="version-section" class="version-area">
                     <p>バージョン速報一覧（PDF）</p>
-                    <a href="file1.pdf" target="_blank" class="version-link">📄 takei.net_v4.1.0_速報.pdf</a>
-                    <a href="file2.pdf" target="_blank" class="version-link">📄 takei.net_v4.0.0_記録.pdf</a>
-                    <a href="file3.pdf" target="_blank" class="version-link">📄 takei.net_v3.9.0_更新.pdf</a>
-                    <a href="file4.pdf" target="_blank" class="version-link">📄 takei.net_v3.8.0_履歴.pdf</a>
+                    
+                    <a href="takei_v410.pdf" target="_blank" class="version-link">📄 takei.net_v4.1.0_速報.pdf</a>
+                    <a href="takei_v400.pdf" target="_blank" class="version-link">📄 takei.net_v4.0.0_記録.pdf</a>
+                    <a href="takei_v390.pdf" target="_blank" class="version-link">📄 takei.net_v3.9.0_更新.pdf</a>
+                    <a href="takei_v380.pdf" target="_blank" class="version-link">📄 takei.net_v3.8.0_履歴.pdf</a>
                 </div>
 
                 <div id="quiz-section" class="quiz-area">
@@ -122,20 +125,18 @@
     </footer>
 
     <script>
-        // 速報リストの表示/非表示
         function toggleVersions() {
             const v = document.getElementById('version-section');
             const q = document.getElementById('quiz-section');
             v.style.display = (v.style.display === 'block') ? 'none' : 'block';
-            q.style.display = 'none'; // クイズが開いていたら閉じる
+            q.style.display = 'none'; 
         }
 
-        // クイズエリアの表示/非表示
         function toggleQuiz() {
             const v = document.getElementById('version-section');
             const q = document.getElementById('quiz-section');
             q.style.display = (q.style.display === 'block') ? 'none' : 'block';
-            v.style.display = 'none'; // 速報が開いていたら閉じる
+            v.style.display = 'none'; 
         }
 
         function checkAnswer() {
