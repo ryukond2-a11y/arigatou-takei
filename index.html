@@ -7,60 +7,67 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
     <style>
-    /* 共通デザイン：濃いめの水色ベース */
-    .info-area {
+    /* クイズと速報エリア（共通デザイン） */
+    .quiz-area, .version-area {
         display: none;
         margin-top: 20px;
         padding: 20px;
-        background: rgba(0, 151, 167, 0.1); /* 濃いシアン背景 */
-        border: 2px solid #0097a7; /* 濃いシアン枠線 */
+        background: rgba(0, 188, 212, 0.1); /* 濃いめの水色を背景に */
+        border: 2px solid #00bcd4; /* 枠線を濃い水色に */
         border-radius: 12px;
         backdrop-filter: blur(5px);
-        text-align: left;
     }
-    .info-area p { color: #00e5ff; font-weight: bold; margin-bottom: 10px; }
-    
-    /* 稼働状況専用の枠（常に表示） */
-    .status-box {
-        margin-top: 25px;
-        padding: 15px;
-        border: 1px solid #0097a7;
-        border-radius: 10px;
-        background: rgba(0, 0, 0, 0.3);
-        text-align: center;
-    }
-    .status-tag {
-        display: inline-block;
-        padding: 2px 10px;
-        border-radius: 4px;
+    .quiz-area p, .version-area p {
+        color: #00bcd4; 
         font-weight: bold;
-        margin-left: 10px;
+        margin-bottom: 10px;
     }
-    .online { background: #00c853; color: white; } /* 正常時 */
-    .offline { background: #d50000; color: white; } /* バグ・メンテ時 */
-
-    /* 濃いめのリンクボタン */
+    .quiz-area input {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #00bcd4;
+        background: #fff;
+        color: #000;
+        width: 100%;
+        max-width: 250px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+    /* 濃いめの水色ボタン（リンク形式） */
     .forgot-link {
         display: inline-block;
-        margin: 15px 10px 0 0;
-        color: #00e5ff; 
+        margin-top: 15px;
+        color: #00bcd4; /* 濃いめの水色 */
         text-decoration: none;
         font-size: 0.95em;
         font-weight: bold;
         cursor: pointer;
-        border-bottom: 2px solid #0097a7;
+        border-bottom: 2px solid #00bcd4; /* 下線も太く */
         transition: 0.3s;
     }
-    .forgot-link:hover { color: #fff; border-color: #fff; }
-
-    .pdf-item {
+    .forgot-link:hover {
+        color: #80deea;
+        border-color: #80deea;
+    }
+    #access-code-display {
+        margin-top: 15px;
+        font-size: 1.1em;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    /* 速報PDFリンクのスタイル（リスト形式） */
+    .version-link {
         display: block;
         padding: 12px;
         color: #fff;
         text-decoration: none;
-        border-bottom: 1px solid rgba(0, 151, 167, 0.3);
+        border-bottom: 1px solid rgba(0, 188, 212, 0.3);
+        font-size: 0.95em;
+        text-align: left;
     }
-    .pdf-item:last-child { border-bottom: none; }
+    .version-link:last-child { border-bottom: none; }
+    .version-link:hover { background: rgba(0, 188, 212, 0.2); }
 </style>
 </head>
 <body>
@@ -78,33 +85,25 @@
                     takei.net 公式サイト
                 </a>
 
-                <br>
-                <span class="forgot-link" onclick="toggleArea('version-section')">📋 バージョン速報</span>
-                <span class="forgot-link" onclick="toggleArea('manual-section')">📖 操作方法</span>
-                <span class="forgot-link" onclick="toggleArea('quiz-section')">🔑 コードを忘れた方</span>
+                <span class="forgot-link" onclick="toggleVersions()" style="margin-right: 20px;">バージョン速報を見る</span>
+                
+                <span class="forgot-link" onclick="toggleQuiz()">アクセスコードを忘れた方</span>
 
-                <div id="version-section" class="info-area">
-                    <p>バージョン速報一覧</p>
-                    <a href="takei_v410.pdf" target="_blank" class="pdf-item">📄 takei.net_v4.1.0_速報.pdf</a>
-                    <a href="takei_v400.pdf" target="_blank" class="pdf-item">📄 takei.net_v4.0.0_記録.pdf</a>
+                <div id="version-section" class="version-area">
+                    <p>バージョン速報一覧（PDF）</p>
+                    
+                    <a href="takei.netバージョン速報ver.2.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.2.0.0</a>
+                    <a href="takei.netバージョン速報ver.3.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.3.0.0</a>
+                    <a href="takei.netバージョン速報ver.4.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.4.0.0</a> 
+                    <a href="takei.netバージョン速報ver.5.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.5.0.0</a>
                 </div>
+            
 
-                <div id="manual-section" class="info-area">
-                    <p>操作方法マニュアル</p>
-                    <a href="manual.pdf" target="_blank" class="pdf-item">📄 takei.net操作手順書.pdf</a>
-                </div>
-
-                <div id="quiz-section" class="info-area">
+                <div id="quiz-section" class="quiz-area">
                     <p>武井先生の本名を漢字で答えよ</p>
-                    <input type="text" id="quiz-answer" placeholder="漢字で入力" style="width: 100%; max-width: 250px; padding: 10px; border-radius: 5px; border: none;">
-                    <button class="btn btn-sub" style="padding: 5px 15px; margin-top: 10px;" onclick="checkAnswer()">回答</button>
-                    <div id="access-code-display" style="margin-top: 10px;"></div>
-                </div>
-
-                <div class="status-box">
-                    <span style="color: #00e5ff; font-weight: bold;">takei.net 稼働状況:</span>
-                    <span class="status-tag online">正常稼働中</span>
-                    <p style="font-size: 0.8em; color: #ccc; margin-top: 5px;">※時々バグります。その際はアーカイブをご利用ください。</p>
+                    <input type="text" id="quiz-answer" placeholder="漢字で入力">
+                    <button class="btn btn-sub" style="padding: 10px 20px;" onclick="checkAnswer()">回答</button>
+                    <div id="access-code-display"></div>
                 </div>
             </div>
         </div>
@@ -127,22 +126,24 @@
     </footer>
 
     <script>
-        // 指定したエリアを表示し、他を閉じる
-        function toggleArea(id) {
-            const ids = ['version-section', 'manual-section', 'quiz-section'];
-            ids.forEach(areaId => {
-                const el = document.getElementById(areaId);
-                if (areaId === id) {
-                    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-                } else {
-                    el.style.display = 'none';
-                }
-            });
+        function toggleVersions() {
+            const v = document.getElementById('version-section');
+            const q = document.getElementById('quiz-section');
+            v.style.display = (v.style.display === 'block') ? 'none' : 'block';
+            q.style.display = 'none'; 
+        }
+
+        function toggleQuiz() {
+            const v = document.getElementById('version-section');
+            const q = document.getElementById('quiz-section');
+            q.style.display = (q.style.display === 'block') ? 'none' : 'block';
+            v.style.display = 'none'; 
         }
 
         function checkAnswer() {
             const answer = document.getElementById('quiz-answer').value;
             const display = document.getElementById('access-code-display');
+
             if (answer === "武井健二") {
                 display.innerHTML = "正解です！アクセスコードは【aisiteruyotakei】です。";
                 display.style.color = "#00ffcc";
@@ -152,5 +153,6 @@
             }
         }
     </script>
+
 </body>
 </html>
