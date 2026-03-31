@@ -156,3 +156,159 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卒業記念アーカイブ | ありがとう武井</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+    /* 共通デザイン：濃いめの水色ベース */
+    .info-area {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background: rgba(0, 151, 167, 0.1); /* 濃いシアン背景 */
+        border: 2px solid #0097a7; /* 濃いシアン枠線 */
+        border-radius: 12px;
+        backdrop-filter: blur(5px);
+        text-align: left;
+    }
+    .info-area p { color: #00e5ff; font-weight: bold; margin-bottom: 10px; }
+    
+    /* 稼働状況専用の枠（常に表示） */
+    .status-box {
+        margin-top: 25px;
+        padding: 15px;
+        border: 1px solid #0097a7;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        text-align: center;
+    }
+    .status-tag {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+    .online { background: #00c853; color: white; } /* 正常時 */
+    .offline { background: #d50000; color: white; } /* バグ・メンテ時 */
+
+    /* 濃いめのリンクボタン */
+    .forgot-link {
+        display: inline-block;
+        margin: 15px 10px 0 0;
+        color: #00e5ff; 
+        text-decoration: none;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-bottom: 2px solid #0097a7;
+        transition: 0.3s;
+    }
+    .forgot-link:hover { color: #fff; border-color: #fff; }
+
+    .pdf-item {
+        display: block;
+        padding: 12px;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 151, 167, 0.3);
+    }
+    .pdf-item:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="container">
+            <p class="brand">Arigato Taketi Fan Club</p>
+            <h1>ありがとう武井 <br><span class="highlight"> </span></h1>
+
+            <div class="cta-group">
+                <a href="./arigato-takei.pdf" target="_blank" class="btn btn-main">
+                    PDF版「ありがとう武井」を閲覧
+                </a>
+                <a href="https://takei-net.onrender.com" class="btn btn-sub">
+                    takei.net 公式サイト
+                </a>
+
+                <br>
+                <span class="forgot-link" onclick="toggleArea('version-section')">📋 バージョン速報</span>
+                <span class="forgot-link" onclick="toggleArea('manual-section')">📖 操作方法</span>
+                <span class="forgot-link" onclick="toggleArea('quiz-section')">🔑 コードを忘れた方</span>
+
+                <div id="version-section" class="info-area">
+                    <p>バージョン速報一覧</p>
+                    <a href="takei_v410.pdf" target="_blank" class="pdf-item">📄 takei.net_v4.1.0_速報.pdf</a>
+                    <a href="takei_v400.pdf" target="_blank" class="pdf-item">📄 takei.net_v4.0.0_記録.pdf</a>
+                </div>
+
+                <div id="manual-section" class="info-area">
+                    <p>操作方法マニュアル</p>
+                    <a href="manual.pdf" target="_blank" class="pdf-item">📄 takei.net操作手順書.pdf</a>
+                </div>
+
+                <div id="quiz-section" class="info-area">
+                    <p>武井先生の本名を漢字で答えよ</p>
+                    <input type="text" id="quiz-answer" placeholder="漢字で入力" style="width: 100%; max-width: 250px; padding: 10px; border-radius: 5px; border: none;">
+                    <button class="btn btn-sub" style="padding: 5px 15px; margin-top: 10px;" onclick="checkAnswer()">回答</button>
+                    <div id="access-code-display" style="margin-top: 10px;"></div>
+                </div>
+
+                <div class="status-box">
+                    <span style="color: #00e5ff; font-weight: bold;">takei.net 稼働状況:</span>
+                    <span class="status-tag online">正常稼働中</span>
+                    <p style="font-size: 0.8em; color: #ccc; margin-top: 5px;">※時々バグります。その際はアーカイブをご利用ください。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="message-section">
+        <div class="container">
+            <h2>Guest Message</h2>
+            <p>武井先生の目撃情報など募集中です</p>
+            <div class="cta-group">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScfi4jiO7deaC6QXdaqIjjdeoyc4s-WwdApZjo6-MRfe0vL_Q/viewform?usp=publish-editor" target="_blank" class="btn btn-sub">
+                    メッセージを投稿する
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Arigato Taketi Fan Club. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 指定したエリアを表示し、他を閉じる
+        function toggleArea(id) {
+            const ids = ['version-section', 'manual-section', 'quiz-section'];
+            ids.forEach(areaId => {
+                const el = document.getElementById(areaId);
+                if (areaId === id) {
+                    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
+
+        function checkAnswer() {
+            const answer = document.getElementById('quiz-answer').value;
+            const display = document.getElementById('access-code-display');
+            if (answer === "武井健二") {
+                display.innerHTML = "正解です！アクセスコードは【aisiteruyotakei】です。";
+                display.style.color = "#00ffcc";
+            } else {
+                display.innerHTML = "答えが違います。";
+                display.style.color = "#ff6666";
+            }
+        }
+    </script>
+</body>
+</html>
