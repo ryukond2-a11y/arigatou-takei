@@ -22,7 +22,7 @@
         font-weight: bold;
         margin-bottom: 10px;
     }
-    /* 稼働状況枠の追加（デザイン維持） */
+    /* 稼働状況枠 */
     .status-box {
         margin-top: 25px;
         padding: 15px;
@@ -100,27 +100,30 @@
                 <a href="./arigato-takei.pdf" target="_blank" class="btn btn-main">
                     PDF版「ありがとう武井」を閲覧
                 </a>
+                
                 <a href="https://takei-net.onrender.com" class="btn btn-sub">
-                    takei.net 公式サイト
+                    takei.net 公式
+                </a>
+                <a href="https://takei-hiroba.onrender.com/" target="_blank" class="btn btn-sub" style="background: #ff9800; border: none; color: white;">
+                    たけい広場 (新着)
                 </a>
 
+                <br>
                 <span class="forgot-link" onclick="toggleVersions()" style="margin-right: 20px;">バージョン速報を見る</span>
-
                 <span class="forgot-link" onclick="toggleManual()" style="margin-right: 20px;">操作方法マニュアル</span>
-                
                 <span class="forgot-link" onclick="toggleQuiz()">アクセスコードを忘れた方</span>
 
                 <div id="manual-section" class="manual-area">
-                    <p>使用方法マニュアル</p>
-                    <a href="使用方法.pdf" target="_blank" class="version-link">takei.net操作方法マニュアル</a>
+                    <p>操作方法マニュアル（PDF）</p>
+                    <a href="takei.net操作方法.pdf" target="_blank" class="version-link">takei.net 操作マニュアル</a>
+                    <a href="takei_hiroba_manual.pdf" target="_blank" class="version-link">たけい広場 使い方ガイド</a>
                 </div>
 
                 <div id="version-section" class="version-area">
                     <p>バージョン速報一覧（PDF）</p>
-                    <a href="takei.netバージョン速報ver.2.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.2.0.0</a>
-                    <a href="takei.netバージョン速報ver.3.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.3.0.0</a>
-                    <a href="takei.netバージョン速報ver.4.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.4.0.0</a> 
-                    <a href="takei.netバージョン速報ver.5.0.0.pdf" target="_blank" class="version-link">takei.netバージョン速報ver.5.0.0</a>
+                    <a href="takei.netバージョン速報ver.5.0.0.pdf" target="_blank" class="version-link">takei.net ver.5.0.0 速報</a>
+                    <a href="takei_hiroba_release.pdf" target="_blank" class="version-link">たけい広場 リリース速報</a>
+                    <a href="takei.netバージョン速報ver.4.0.0.pdf" target="_blank" class="version-link">takei.net ver.4.0.0 速報</a>
                 </div>
 
                 <div id="quiz-section" class="quiz-area">
@@ -131,9 +134,9 @@
                 </div>
 
                 <div class="status-box">
-                    <span style="color: #00bcd4; font-weight: bold;">takei.net 稼働状況:</span>
-                    <span class="status-badge online">正常稼働中</span>
-                    <p style="font-size: 0.8em; color: #ccc; margin-top: 8px;">※不具合時は1日ほどおいて再アクセスをお願いします。</p>
+                    <span style="color: #00bcd4; font-weight: bold;">サービス稼働状況:</span>
+                    <span class="status-badge online">takei.net: 正常</span>
+                    <span class="status-badge online">たけい広場: 正常</span>
                 </div>
             </div>
         </div>
@@ -153,36 +156,26 @@
 
     <footer>
         <p>&copy; 2026 Arigato Taketi Fan Club. All Rights Reserved.</p>
-    </footer>
+    </div>
 
     <script>
         function toggleVersions() {
-            const v = document.getElementById('version-section');
-            const q = document.getElementById('quiz-section');
-            const m = document.getElementById('manual-section');
-            v.style.display = (v.style.display === 'block') ? 'none' : 'block';
-            q.style.display = 'none'; 
-            m.style.display = 'none';
+            closeAll();
+            document.getElementById('version-section').style.display = 'block';
         }
-
         function toggleManual() {
-            const v = document.getElementById('version-section');
-            const q = document.getElementById('quiz-section');
-            const m = document.getElementById('manual-section');
-            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
-            v.style.display = 'none';
-            q.style.display = 'none';
+            closeAll();
+            document.getElementById('manual-section').style.display = 'block';
         }
-
         function toggleQuiz() {
-            const v = document.getElementById('version-section');
-            const q = document.getElementById('quiz-section');
-            const m = document.getElementById('manual-section');
-            q.style.display = (q.style.display === 'block') ? 'none' : 'block';
-            v.style.display = 'none'; 
-            m.style.display = 'none';
+            closeAll();
+            document.getElementById('quiz-section').style.display = 'block';
         }
-
+        function closeAll() {
+            document.getElementById('version-section').style.display = 'none';
+            document.getElementById('manual-section').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'none';
+        }
         function checkAnswer() {
             const answer = document.getElementById('quiz-answer').value;
             const display = document.getElementById('access-code-display');
